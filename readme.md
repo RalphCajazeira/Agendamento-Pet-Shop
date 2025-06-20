@@ -465,11 +465,218 @@ Agora sua aplicação Webpack:
 - Copia o arquivo para `dist/`.
 - Exibe corretamente no navegador ao usar o Dev Server.
 
-Na próxima aula, será feita a configuração do carregamento de CSS na aplicação.
+Perfeito! Aqui está o **TÓPICO 6 – Configurando carregamento de CSS no Webpack**, formatado em `.md` de forma clara e didática, seguindo exatamente o passo a passo da aula:
+
+---
+
+## 🧩 TÓPICO 6 – Configurando carregamento de CSS no Webpack
+
+### ✅ 6.1 – Instalar os loaders de CSS
+
+Execute no terminal:
+
+```bash
+npm install style-loader@3.3.3 css-loader@6.8.1 --save-dev
+```
+
+> Esses loaders permitem que o Webpack leia arquivos `.css` e os injete no HTML final.
+
+---
+
+### ✅ 6.2 – Configurar os loaders no `webpack.config.js`
+
+Logo abaixo do bloco de `plugins`, adicione:
+
+```js
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: ["style-loader", "css-loader"],
+    },
+  ];
+}
+```
+
+> Isso informa ao Webpack que todos os arquivos `.css` devem ser processados com os dois loaders.
+
+---
+
+### ✅ 6.3 – Importar os arquivos CSS no `main.js`
+
+No arquivo `src/main.js`, adicione:
+
+```js
+"use strict";
+
+import "./styles/global.css";
+import "./styles/form.css";
+import "./styles/schedule.css";
+```
+
+> Essas importações substituem o uso de `<link>` no HTML. O Webpack cuidará de injetar os estilos dinamicamente.
+
+---
+
+### ✅ 6.4 – Remover o `<link>` do `index.html`
+
+No arquivo `index.html`, remova a antiga importação de CSS (caso exista):
+
+```html
+<!-- Remover esta linha -->
+<link rel="stylesheet" href="index.css" />
+```
+
+---
+
+### ✅ 6.5 – Executar a build
+
+Rode:
+
+```bash
+npm run build
+```
+
+Você verá no terminal algo como:
+
+```
+[webpack] ./src/styles/global.css
+[webpack] ./src/styles/form.css
+[webpack] ./src/styles/schedule.css
+```
+
+> Isso indica que os estilos foram processados corretamente.
+
+---
+
+### ✅ 6.6 – Rodar com Dev Server e verificar resultado
+
+Execute:
+
+```bash
+npm run dev
+```
+
+Abra no navegador:
+
+```
+http://localhost:3000
+```
+
+> O conteúdo agora estará **estilizado corretamente**! As classes CSS foram aplicadas e a aparência da aplicação será visível.
+
+---
+
+### ⚠️ OBS: Ícones não aparecem ainda
+
+A pasta `assets/` (onde estão os ícones SVG) **ainda não está sendo copiada para a pasta `dist`**. Isso será configurado na próxima aula.
+
+---
+
+### ✅ 6.7 – Conclusão
+
+Agora sua aplicação:
+
+- Carrega e aplica estilos CSS corretamente via Webpack.
+- Remove a necessidade de `<link>` manual no HTML.
+- Injeta os estilos dinamicamente via `JavaScript`.
+
+Perfeito! Aqui está o **TÓPICO 7 – Copiando arquivos estáticos (assets) para a pasta de build com Webpack**, já formatado em Markdown `.md` para continuar sua documentação passo a passo:
+
+---
+
+## 🧩 TÓPICO 7 – Copiando arquivos estáticos (assets) com Webpack
+
+### ✅ 7.1 – Problema: Ícones não estavam sendo carregados
+
+Mesmo após configurar o CSS, os ícones (como SVGs) da pasta `assets/` não apareciam na aplicação porque não estavam sendo copiados para a build final.
+
+---
+
+### ✅ 7.2 – Solução: instalar o plugin `copy-webpack-plugin`
+
+Execute no terminal:
+
+```bash
+npm install copy-webpack-plugin@11.0.0 --save-dev
+```
+
+---
+
+### ✅ 7.3 – Importar o plugin no `webpack.config.js`
+
+Adicione no topo do arquivo:
+
+```js
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+```
+
+---
+
+### ✅ 7.4 – Configurar o plugin no bloco `plugins`
+
+Logo após o `HtmlWebpackPlugin`, adicione:
+
+```js
+new CopyWebpackPlugin({
+  patterns: [
+    {
+      from: path.resolve(__dirname, "src", "assets"),
+      to: path.resolve(__dirname, "dist", "src", "assets"),
+    },
+  ],
+});
+```
+
+> 📌 Explicação:
+>
+> - `from`: caminho da pasta original com os arquivos (SVGs, imagens, etc.).
+> - `to`: destino final dentro da pasta `dist/`.
+
+---
+
+### ✅ 7.5 – Rodar a build
+
+Execute:
+
+```bash
+npm run build
+```
+
+Se a pasta `dist/src/assets/` não aparecer de imediato no VS Code, clique no botão de **recarregar estrutura de arquivos**.
+
+---
+
+### ✅ 7.6 – Rodar o Dev Server e testar
+
+Execute:
+
+```bash
+npm run dev
+```
+
+Abra:
+
+```
+http://localhost:3000
+```
+
+> Agora os ícones e imagens devem estar aparecendo corretamente no navegador 🎉
+
+---
+
+### ✅ 7.7 – Conclusão
+
+Com isso:
+
+- Os arquivos estáticos da pasta `assets/` estão incluídos na build final.
+- Todos os ícones, imagens e SVGs serão carregados corretamente pela aplicação.
+
+Na próxima aula será feita alguma nova configuração ou funcionalidade. Você já pode manter o Dev Server rodando em paralelo para acelerar os testes.
 
 ```
 
 ---
 
-Pronto para seguir com o **TÓPICO 6 – Importando e aplicando CSS no Webpack** assim que você enviar a próxima aula. Deseja manter a mesma organização?
+Se tiver a próxima transcrição da aula, posso montar o **TÓPICO 8** no mesmo formato. Deseja seguir com esse padrão até o final do curso?
 ```
