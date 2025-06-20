@@ -1,8 +1,14 @@
 {
+  "name": "mundo-pet",
+  "description": "Aplicação Web para agendamento de atendimento de Pets",
+  "author": "Ralph Ramos",
   "scripts": {
-    "server": "json-server --watch server.json --port 3333"
+    "server": "json-server --watch server.json --port 3333",
+    "build": "webpack"
   },
   "devDependencies": {
-    "json-server": "^1.0.0-beta.3"
+    "json-server": "^1.0.0-beta.3",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1"
   }
 }

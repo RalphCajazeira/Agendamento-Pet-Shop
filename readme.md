@@ -125,4 +125,107 @@ fetch("http://localhost:3333/schedules", {
 
 > ✅ **Conclusão:** agora você tem uma API local funcional com JSON Server, pronta para ser usada com `fetch`, `axios`, ou qualquer client HTTP.
 
+
+---
+
+## 🧩 TÓPICO 2 – Instalação e Configuração do Webpack
+
+### ✅ 2.1 – Instalar o Webpack e Webpack CLI
+
+Execute no terminal:
+
+```bash
+npm install webpack@5.89.0 webpack-cli@5.1.4 --save-dev
+````
+
+> Use as mesmas versões da aula para evitar problemas com atualizações futuras.
+
+---
+
+### ✅ 2.2 – Adicionar script de build no `package.json`
+
+No arquivo `package.json`, adicione:
+
+```json
+"scripts": {
+  "server": "json-server --watch server.json --port 3333",
+  "build": "webpack"
+}
+```
+
+---
+
+### ✅ 2.3 – Criar o entry point da aplicação
+
+Na pasta `src/`, crie o arquivo:
+
+```text
+src/main.js
+```
+
+Esse será o **ponto de entrada** da aplicação (entry point).
+
+---
+
+### ✅ 2.4 – Criar o arquivo de configuração `webpack.config.js`
+
+Na raiz do projeto (fora da pasta `src`), crie o arquivo:
+
+```text
+webpack.config.js
+```
+
+Com o conteúdo:
+
+```js
+const path = require("path");
+
+module.exports = {
+  target: "web",
+  mode: "development",
+  entry: path.resolve(__dirname, "src", "main.js"),
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist")
+  }
+};
+```
+
+> 📌 **Explicações**:
+>
+> * `target: "web"` → define que será uma aplicação para navegador.
+> * `mode: "development"` → modo de desenvolvimento.
+> * `entry` → arquivo principal da aplicação.
+> * `output` → onde o Webpack vai gerar o arquivo final, dentro da pasta `dist`.
+
+---
+
+### ✅ 2.5 – Gerar a build com Webpack
+
+Execute o comando:
+
+```bash
+npm run build
+```
+
+> Isso criará a pasta `dist/` com o arquivo `main.js` (por enquanto vazio).
+
+---
+
+### ✅ 2.6 – Dica: recarregar estrutura de arquivos no VS Code
+
+Se a pasta `dist/` não aparecer de imediato, clique no ícone de **reload da aba de arquivos** no VS Code para atualizar a visualização da estrutura do projeto.
+
+---
+
+### ✅ 2.7 – Conclusão
+
+Agora o Webpack está instalado e configurado para:
+
+* Usar `src/main.js` como ponto de entrada.
+* Gerar um bundle final em `dist/main.js`.
+* Trabalhar no modo `development`.
+
+Na próxima etapa, você poderá adicionar funcionalidades ao `main.js`, importar CSS, HTML, etc., e configurar novos loaders no `webpack.config.js`.
+
 ```
