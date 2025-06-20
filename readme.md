@@ -672,11 +672,218 @@ Com isso:
 - Os arquivos estáticos da pasta `assets/` estão incluídos na build final.
 - Todos os ícones, imagens e SVGs serão carregados corretamente pela aplicação.
 
-Na próxima aula será feita alguma nova configuração ou funcionalidade. Você já pode manter o Dev Server rodando em paralelo para acelerar os testes.
+Excelente! Aqui está o **TÓPICO 8 – Adicionando Babel ao Webpack para compatibilidade de navegadores**, já formatado em `.md` e pronto para colar no seu arquivo de anotações:
+
+---
+
+## 🧩 TÓPICO 8 – Adicionando Babel ao Webpack
+
+### ✅ 8.1 – Objetivo
+
+O Babel permite converter código moderno JavaScript para versões compatíveis com navegadores mais antigos.
+
+---
+
+### ✅ 8.2 – Instalar os pacotes necessários
+
+Execute no terminal:
+
+```bash
+npm install babel-loader@9.1.3 @babel/core@7.23.7 @babel/preset-env@7.23.7 --save-dev
+```
+
+---
+
+### ✅ 8.3 – Verificar instalação
+
+No `package.json`, você verá:
+
+```json
+"devDependencies": {
+  "babel-loader": "9.1.3",
+  "@babel/core": "7.23.7",
+  "@babel/preset-env": "7.23.7"
+}
+```
+
+---
+
+### ✅ 8.4 – Configurar o Babel no `webpack.config.js`
+
+No bloco `module.rules`, abaixo da regra de CSS, adicione:
+
+```js
+{
+  test: /\.js$/,
+  exclude: /node_modules/,
+  use: {
+    loader: "babel-loader",
+    options: {
+      presets: ["@babel/preset-env"]
+    }
+  }
+}
+```
+
+> 📌 Explicação:
+>
+> - `test: /\.js$/`: aplica a regra a arquivos `.js`.
+> - `exclude`: ignora a pasta `node_modules`.
+> - `loader`: usa o `babel-loader`.
+> - `presets`: define que o Babel deve usar o preset `@babel/preset-env`.
+
+---
+
+### ✅ 8.5 – Erros comuns (exemplo prático da aula)
+
+Se houver erro como:
+
+```
+Cannot find package '@babel/presets-env'
+```
+
+Verifique se escreveu `presets` com "s". O correto é:
+
+```js
+presets: ["@babel/preset-env"];
+```
+
+> A ocorrência desse erro mostra que o Webpack passou pela regra do Babel, mas não encontrou o pacote corretamente.
+
+---
+
+### ✅ 8.6 – Testar a configuração
+
+Execute:
+
+```bash
+npm run build
+```
+
+Se tudo estiver correto, a build será concluída com sucesso.
+
+---
+
+### ✅ 8.7 – Rodar o projeto normalmente
+
+Abra dois terminais:
+
+- No primeiro:
+
+```bash
+npm run server
+```
+
+- No segundo:
+
+```bash
+npm run dev
+```
+
+> Agora a aplicação Web e a API JSON Server estarão rodando ao mesmo tempo, sem conflitos de porta.
+
+---
+
+### ✅ 8.8 – Conclusão
+
+Agora seu projeto está configurado para:
+
+- Usar Babel e garantir compatibilidade de JavaScript com navegadores antigos.
+- Continuar funcionando perfeitamente com as builds via Webpack.
+
+Perfeito! Aqui está o **TÓPICO 9 – Instalação e configuração do Day.js**, totalmente formatado em Markdown `.md`, seguindo o padrão dos tópicos anteriores:
+
+---
+
+## 🧩 TÓPICO 9 – Instalação e configuração do Day.js
+
+### ✅ 9.1 – Objetivo
+
+O Day.js será utilizado para manipular e formatar **datas e horas** com uma sintaxe moderna e leve. Também será configurado para usar o idioma **Português do Brasil (pt-br)** por padrão.
+
+---
+
+### ✅ 9.2 – Instalar o Day.js
+
+Execute no terminal:
+
+```bash
+npm install dayjs@1.11.10
+```
+
+> O Day.js é uma dependência de produção, pois será usado tanto no desenvolvimento quanto na aplicação final.
+
+---
+
+### ✅ 9.3 – Criar pasta para bibliotecas (`libs`)
+
+Na pasta `src/`, crie a estrutura:
+
+```
+src/
+├── libs/
+│   └── dayjs.js
+```
+
+---
+
+### ✅ 9.4 – Configurar o arquivo `src/libs/dayjs.js`
+
+Adicione o seguinte conteúdo:
+
+```js
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
+
+// Define o idioma padrão como português do Brasil
+dayjs.locale("pt-br");
+```
+
+> Isso garante que toda vez que `dayjs` for usado no projeto, ele já estará configurado para o padrão brasileiro.
+
+---
+
+### ✅ 9.5 – Importar a configuração no `main.js`
+
+No topo do arquivo `src/main.js`, adicione:
+
+```js
+"use strict";
+
+// Configuração global do Day.js
+import "./libs/dayjs.js";
+```
+
+---
+
+### ✅ 9.6 – Teste rápido de funcionamento (opcional)
+
+Você pode testar adicionando temporariamente:
+
+```js
+import dayjs from "dayjs";
+
+console.log(dayjs().format("HH:mm"));
+console.log(dayjs().format("DD/MM/YYYY"));
+```
+
+> Ao abrir o navegador e inspecionar o console, deve aparecer a hora atual e a data formatada em pt-BR.
+
+---
+
+### ✅ 9.7 – Conclusão
+
+Com o Day.js configurado:
+
+- Todas as manipulações de data e hora já virão formatadas para o idioma português do Brasil.
+- Você pode usar `dayjs().format(...)` em qualquer parte da aplicação.
+- A configuração está centralizada e pronta para reaproveitamento.
+
+Na próxima etapa, será iniciada a implementação das funcionalidades reais da aplicação (agendamento, formulários, etc.).
 
 ```
 
 ---
 
-Se tiver a próxima transcrição da aula, posso montar o **TÓPICO 8** no mesmo formato. Deseja seguir com esse padrão até o final do curso?
+Pronto para seguir com o **TÓPICO 10** quando você enviar a próxima transcrição. Deseja que eu monte também um **sumário final dos tópicos** ao concluir todos os módulos?
 ```
