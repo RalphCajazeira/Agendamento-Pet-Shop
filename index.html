@@ -14,9 +14,103 @@
     />
   </head>
   <body>
-    <header>
-      <img src="./src/assets/Dog-Duotone.svg" alt="" />
-      <span>Mundo Pet</span>
-    </header>
+    <div class="general">
+      <div class="logo">
+        <img src="./src/assets/Dog-Duotone.svg" alt="" />
+        <span>Mundo Pet</span>
+      </div>
+
+      <main class="container">
+        <div class="title">
+          <header>
+            <h1>Sua agenda</h1>
+            <p>
+              Aqui você pode ver todos os clientes e serviços agendados para
+              hoje.
+            </p>
+          </header>
+          <input type="date" name="dateSchedule" id="" />
+        </div>
+        <aside class="schedule">
+          <section class="schedule-period">
+            <header>
+              <img
+                src="./src/assets/icons/Sun-Fog--Streamline-Solar.svg"
+                alt="Manhã"
+              />
+              <strong>Manhã</strong>
+              <span>09h-12h</span>
+            </header>
+
+            <ul id="period-morning" class="period">
+              <!-- Exemplo  -->
+              <li>
+                <strong>11:00</strong>
+                <div class="animal-owner">
+                  Rex <span>/</span> <span>Ralph Ramos</span>
+                </div>
+                <span class="service">Vacinação</span>
+                <span class="remove-schedule">Remover agendamento</span>
+              </li>
+
+              <li>
+                <strong>11:30</strong>
+                <div class="animal-owner">
+                  Totó <span>/</span> <span>Adna Milly</span>
+                </div>
+                <span class="service">Vacinação</span>
+                <span class="remove-schedule">Remover agendamento</span>
+              </li>
+            </ul>
+          </section>
+
+          <section class="schedule-period">
+            <header>
+              <img
+                src="./src/assets/icons/Cloud-Sun-4--Streamline-Solar.svg"
+                alt="Tarde"
+              />
+              <strong>Tarde</strong>
+              <span>13h-18h</span>
+            </header>
+            <ul id="period-afternoon" class="period">
+              <!-- Exemplo -->
+              <li>
+                <strong>14:00</strong>
+                <span>Rodrigo Gonçalves</span>
+                <img
+                  src="./src/assets/cancel.svg"
+                  alt="Cancelar"
+                  class="cancel-icon"
+                />
+              </li>
+            </ul>
+          </section>
+
+          <section class="schedule-period">
+            <header>
+              <img
+                src="./src/assets/icons/Moon-Stars--Streamline-Solar.svg"
+                alt="noite"
+              />
+              <strong>Noite</strong>
+              <span>19h-21h</span>
+            </header>
+            <ul id="period-night" class="period">
+              <!-- Exemplo -->
+              <li>
+                <strong>19:00</strong>
+                <span>Rodrigo Gonçalves</span>
+                <img
+                  src="./src/assets/cancel.svg"
+                  alt="Cancelar"
+                  class="cancel-icon"
+                />
+              </li>
+            </ul>
+          </section>
+        </aside>
+      </main>
+    </div>
   </body>
 </html>
