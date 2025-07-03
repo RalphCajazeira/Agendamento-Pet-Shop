@@ -14,7 +14,7 @@
   --font-title: bold 1.5rem/2rem var(--ff-inter-t); /* 24px / 32px */
   --font-paragraph-medium: 500 0.875rem/1.5rem var(--ff-inter); /* 14px / 24px */
   --font-paragraph-small: 500 0.75rem/1rem var(--ff-inter); /* 12px / 16px */
-  --font-label-large: 700 1rem/1.5rem var(--ff-inter); /* 16px / 24px */
+  --font-label-large: 700 1rem/1.5rem var(--ff-inter-t); /* 16px / 24px */
   --font-label-medium: 700 0.875rem/1.5rem var(--ff-inter); /* 14px / 24px */
   --font-label-small: 700 0.75rem/1rem var(--ff-inter); /* 12px / 16px */
   --font-link: 500 0.75rem/1rem var(--ff-inter); /* 12px / 16px */
