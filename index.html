@@ -29,7 +29,16 @@
               hoje.
             </p>
           </header>
-          <input type="date" name="dateSchedule" id="" />
+
+          <div class="input-date-wrapper">
+            <img src="./src/assets/icons/calendar.svg" alt="Calendário" />
+            <input type="date" class="input-date" />
+            <img
+              src="./src/assets/icons/Arrow-down.svg"
+              alt="Abrir calendário"
+              class="custom-arrow"
+            />
+          </div>
         </div>
         <aside class="schedule">
           <section class="schedule-period">
@@ -50,7 +59,7 @@
                   Rex <span>/</span> <span>Ralph Ramos</span>
                 </div>
                 <span class="service">Vacinação</span>
-                <span class="remove-schedule">Remover agendamento</span>
+                <button class="remove-schedule">Remover agendamento</button>
               </li>
 
               <li>
@@ -59,7 +68,7 @@
                   Totó <span>/</span> <span>Adna Milly</span>
                 </div>
                 <span class="service">Castração</span>
-                <span class="remove-schedule">Remover agendamento</span>
+                <button class="remove-schedule">Remover agendamento</button>
               </li>
             </ul>
           </section>
@@ -81,7 +90,7 @@
                   Tito <span>/</span> <span>Rafael de Jesus</span>
                 </div>
                 <span class="service">Vacinação</span>
-                <span class="remove-schedule">Remover agendamento</span>
+                <button class="remove-schedule">Remover agendamento</button>
               </li>
             </ul>
           </section>
@@ -103,12 +112,16 @@
                   Negão <span>/</span> <span>Rómario Romero</span>
                 </div>
                 <span class="service">Remover Pulgas</span>
-                <span class="remove-schedule">Remover agendamento</span>
+                <button class="remove-schedule">Remover agendamento</button>
               </li>
             </ul>
           </section>
         </aside>
       </main>
+
+      <div class="button-footer">
+        <button id="new-schedule">Novo agendamento</button>
+      </div>
     </div>
   </body>
 </html>

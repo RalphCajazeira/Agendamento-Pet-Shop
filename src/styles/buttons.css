@@ -1,0 +1,29 @@
+.general {
+  & #new-schedule {
+    position: absolute;
+    right: 1.875rem;
+    bottom: 2.0625rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--background-brand);
+    text-transform: uppercase;
+    font: var(--font-label-large);
+    /* box-shadow: 0px 0px 1rem rgba(146, 130, 250, 0.3); */
+  }
+}
+
+@media (max-width: 53rem) {
+  .general {
+    & .button-footer {
+      background-color: var(--background-tertiary);
+      padding-block: 1.125rem;
+      & #new-schedule {
+        position: initial;
+        right: 0;
+        bottom: 0;
+        margin-inline: auto;
+        display: block;
+      }
+    }
+  }
+}

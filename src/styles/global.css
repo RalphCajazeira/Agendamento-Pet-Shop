@@ -62,3 +62,21 @@ body {
 li {
   list-style: none;
 }
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input {
+  border: none;
+  background: none;
+}
+
+@media (max-width: 53rem) {
+  .container {
+    max-width: 24.375rem;
+    padding-inline: 1.25rem;
+  }
+}

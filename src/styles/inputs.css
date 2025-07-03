@@ -1,0 +1,50 @@
+.input-date-wrapper {
+  position: relative; /* para posicionar o ícone da seta */
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-primary);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  background: transparent;
+  gap: 0.25rem;
+  height: 3rem;
+}
+
+.input-date {
+  background: transparent;
+  border: none;
+  color: var(--content-secondary);
+  font: var(--font-paragraph-medium);
+  outline: none;
+  padding-right: 0.5rem; /* espaço pro ícone */
+  flex: 1;
+}
+
+.input-date::-webkit-calendar-picker-indicator {
+  opacity: 0; /* esconder o ícone padrão */
+  position: absolute;
+  right: 0.75rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.custom-arrow {
+  position: absolute;
+  right: 0.75rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  pointer-events: none; /* deixa o clique passar para o input */
+}
+
+@media (max-width: 53rem) {
+  .input-date-wrapper {
+    width: fit-content; /* ou defina o tamanho desejado */
+    max-width: 100%;
+  }
+
+  .input-date {
+    flex: none;
+    width: auto;
+  }
+}
