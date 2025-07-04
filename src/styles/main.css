@@ -11,6 +11,7 @@
     font: 700 1rem/1.5rem var(--ff-familjen);
     color: var(--content-brand);
     background-color: #2e2c30;
+
+    z-index: 1001;
   }
 }
-

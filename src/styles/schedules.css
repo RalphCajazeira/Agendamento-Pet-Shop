@@ -1,7 +1,7 @@
 main {
   padding: 3.875rem 5rem; /* espaçamento interno do main: cima/baixo 3.875rem, lados 5rem */
 
-  .title {
+  & .title {
     display: flex; /* título e data em linha */
     justify-content: space-between; /* joga título para a esquerda e input para a direita */
 
@@ -63,7 +63,9 @@ main {
           min-width: 0; /* permite o conteúdo encolher ao invés de forçar quebra */
 
           & span {
-            color: var(--content-secondary); /* cor secundária no nome do dono */
+            color: var(
+              --content-secondary
+            ); /* cor secundária no nome do dono */
           }
         }
 
@@ -92,9 +94,9 @@ main {
   }
 
   .schedule {
-    .schedule-period {
-      .period {
-        li {
+    & .schedule-period {
+      & .period {
+        & li {
           flex-wrap: wrap; /* permite quebrar linhas no mobile */
 
           & strong {

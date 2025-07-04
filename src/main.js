@@ -10,3 +10,7 @@ import "./styles/form.css";
 import "./styles/schedules.css";
 import "./styles/inputs.css";
 import "./styles/buttons.css";
+import "./styles/modal.css";
+
+// JS
+import "./modules/form/newSchedule.js";
