@@ -37,6 +37,58 @@
   pointer-events: none; /* deixa o clique passar para o input */
 }
 
+.form-wrapper-schedule {
+  margin-top: 1.75rem;
+
+  & .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    font: var(--font-label-medium);
+
+    & input {
+      color: var(--content-secondary);
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    & .input-wrapper-icon {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      border: 1px solid var(--border-primary);
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+
+      & img {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+
+    & + .input-wrapper {
+      margin-top: 1rem;
+    }
+
+    & .input-large {
+      height: 5.375rem;
+      padding: 0.75rem;
+      border: 1px solid var(--border-primary);
+      border-radius: 0.5rem;
+      resize: none;
+      background: transparent;
+      color: var(--content-secondary);
+      font: var(--font-paragraph-medium);
+      outline: none;
+      width: 100%;
+    }
+  }
+}
+
 @media (max-width: 53rem) {
   .input-date-wrapper {
     width: fit-content; /* ou defina o tamanho desejado */

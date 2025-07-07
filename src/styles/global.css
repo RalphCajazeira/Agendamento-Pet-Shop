@@ -74,6 +74,10 @@ input {
   background: none;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 @media (max-width: 53rem) {
   .container {
     max-width: 24.375rem;

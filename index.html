@@ -32,7 +32,12 @@
 
           <div class="input-date-wrapper">
             <img src="./src/assets/icons/calendar.svg" alt="Calendário" />
-            <input type="date" class="input-date" />
+            <input
+              type="date"
+              class="input-date"
+              id="current-date"
+              value="2025-07-20"
+            />
             <img
               src="./src/assets/icons/Arrow-down.svg"
               alt="Abrir calendário"
@@ -120,11 +125,77 @@
       </main>
 
       <div class="button-footer">
-        <button id="new-schedule">Novo agendamento</button>
+        <button id="btn-new-schedule">Novo agendamento</button>
       </div>
 
       <!-- Modal -->
       <div class="modal-overlay" id="modal">
+        <form class="modal-form">
+          <h2>Agende um atendimento</h2>
+          <p>Preencha os dados do cliente para realizar o agendamento:</p>
+
+          <div class="form-wrapper-schedule">
+            <div class="input-wrapper">
+              <label for="name-tutor">Nome do tutor</label>
+              <div class="input-wrapper-icon">
+                <img
+                  src="src/assets/icons/User--Streamline-Solar.svg"
+                  alt="Ícone de usuário"
+                />
+                <input
+                  type="text"
+                  id="name-tutor"
+                  name="name-tutor"
+                  placeholder="Digite o nome do tutor"
+                />
+              </div>
+            </div>
+
+            <div class="input-wrapper">
+              <label for="name-pet">Nome do pet</label>
+              <div class="input-wrapper-icon">
+                <img
+                  src="src/assets/icons/Pet-Paw--Streamline-Core.svg"
+                  alt="Ícone de patinha"
+                />
+                <input
+                  type="text"
+                  id="name-pet"
+                  name="name-pet"
+                  placeholder="Digite o nome do pet"
+                />
+              </div>
+            </div>
+
+            <div class="input-wrapper">
+              <label for="tutor-number">Telefone</label>
+              <div class="input-wrapper-icon">
+                <img
+                  src="src/assets/icons/Pet-Paw--Streamline-Core.svg"
+                  alt="Ícone de patinha"
+                />
+                <input
+                  type="tel"
+                  id="tutor-number"
+                  name="tutor-number"
+                  placeholder="(00) 00000-0000"
+                />
+              </div>
+            </div>
+
+            <div class="input-wrapper">
+              <label for="desc-service">Descrição do serviço</label>
+              <textarea
+                id="desc-service"
+                name="desc-service"
+                class="input-large"
+                placeholder="Ex: Banho e Tosa"
+              ></textarea>
+            </div>
+          </div>
+
+          <button id="btn-schedule">Agendar</button>
+        </form>
         <!-- Modal content vai dentro depois -->
       </div>
     </div>

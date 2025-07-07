@@ -10,9 +10,40 @@
   visibility: hidden; /* começa invisível */
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  overflow-y: auto;
+
+  & h1 {
+    font: var(--font-title);
+  }
+
+  & p {
+    font: var(--font-paragraph-medium);
+    color: var(--content-secondary);
+  }
+
+  & .modal-form {
+    position: absolute; /* permite posicionar a distância do topo */
+    top: 1.375rem; /* distância do topo */
+    left: 50%; /* base para centralizar */
+    transform: translateX(-50%); /* centraliza na horizontal */
+    max-width: 29.8125rem; /* largura máxima do formulário */
+    width: 90%; /* ocupa até 90% da tela em telas pequenas */
+    background: var(--background-secondary); /* cor do modal */
+    padding: 2rem;
+    border-radius: 0.75rem;
+
+    display: grid;
+    justify-content: center;
+  }
 }
 
 .modal-overlay.active {
   visibility: visible;
   opacity: 1;
+}
+
+@media (max-width: 53rem) {
+  .modal-form {
+    margin-top: 3rem;
+  }
 }

@@ -1,5 +1,5 @@
 .general {
-  & #new-schedule {
+  & #btn-new-schedule {
     position: absolute;
     right: 1.875rem;
     bottom: 2.0625rem;
@@ -10,6 +10,18 @@
     font: var(--font-label-large);
     /* box-shadow: 0px 0px 1rem rgba(146, 130, 250, 0.3); */
   }
+
+  & #btn-schedule {
+    margin-top: 1.75rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--background-brand);
+    text-transform: uppercase;
+    font: var(--font-label-large);
+
+    justify-self: right;
+    width: fit-content;
+  }
 }
 
 @media (max-width: 53rem) {
@@ -17,7 +29,7 @@
     & .button-footer {
       background-color: var(--background-tertiary);
       padding-block: 1.125rem;
-      & #new-schedule {
+      & #btn-new-schedule {
         position: initial;
         right: 0;
         bottom: 0;
