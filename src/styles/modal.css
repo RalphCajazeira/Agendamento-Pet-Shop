@@ -12,15 +12,6 @@
   transition: opacity 0.3s ease, visibility 0.3s ease;
   overflow-y: auto;
 
-  & h1 {
-    font: var(--font-title);
-  }
-
-  & p {
-    font: var(--font-paragraph-medium);
-    color: var(--content-secondary);
-  }
-
   & .modal-form {
     position: absolute; /* permite posicionar a distância do topo */
     top: 1.375rem; /* distância do topo */
@@ -34,6 +25,15 @@
 
     display: grid;
     justify-content: center;
+
+    & h2 {
+      font: var(--font-title);
+    }
+
+    & p {
+      font: var(--font-paragraph-medium);
+      color: var(--content-secondary);
+    }
   }
 }
 
