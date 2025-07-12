@@ -51,7 +51,7 @@
               <span>09h-12h</span>
             </header>
 
-            <ul id="period-morning" class="period">
+            <ul id="period-morning" class="period" aria-label="Horatios ">
               <!-- Exemplo  -->
               <li>
                 <strong>11:00</strong>
@@ -124,8 +124,8 @@
       </div>
 
       <!-- Modal -->
-      <div class="modal-overlay" id="modal">
-        <form class="modal-form">
+      <div class="modal-overlay" id="modal-schedule">
+        <form id="form-schedule" class="modal-form">
           <h2>Agende um atendimento</h2>
           <p>Preencha os dados do cliente para realizar o agendamento:</p>
 
@@ -142,6 +142,7 @@
                   id="name-tutor"
                   name="name-tutor"
                   placeholder="Digite o nome do tutor"
+                  required
                 />
               </div>
             </div>
@@ -158,6 +159,7 @@
                   id="name-pet"
                   name="name-pet"
                   placeholder="Digite o nome do pet"
+                  required
                 />
               </div>
             </div>
@@ -174,6 +176,7 @@
                   id="tutor-number"
                   name="tutor-number"
                   placeholder="(00) 00000-0000"
+                  required
                 />
               </div>
             </div>
@@ -185,6 +188,7 @@
                 name="desc-service"
                 class="input-large"
                 placeholder="Ex: Banho e Tosa"
+                required
               ></textarea>
             </div>
 
@@ -193,7 +197,12 @@
                 <label for="schedule-date">Data</label>
                 <div class="input-date-wrapper">
                   <img src="./src/assets/icons/calendar.svg" alt="Calendário" />
-                  <input type="date" class="input-date" id="schedule-date" />
+                  <input
+                    type="date"
+                    class="input-date"
+                    id="schedule-date"
+                    required
+                  />
                   <img
                     src="./src/assets/icons/Arrow-down.svg"
                     alt="Abrir calendário"
@@ -209,10 +218,8 @@
                     src="./src/assets/icons/Clock-Circle--Streamline-Solar.svg"
                     alt="Calendário"
                   />
-                  <select id="schedule-time" class="input-date">
-                    <option disabled selected value="">
-                      Selecione um horário
-                    </option>
+                  <select id="schedule-time" class="input-date" required>
+                    <option disabled selected value="">Selecione</option>
                   </select>
 
                   <img

@@ -85,12 +85,7 @@ form.addEventListener("submit", (event) => {
   fecharModal(); // Fecha o modal ao finalizar
 });
 
-// ✅ Botão voltar do celular fecha modal
-window.addEventListener("popstate", () => {
-  if (modal.classList.contains("active")) {
-    fecharModal();
-  }
-});
+
 
 //  Acontece quando a página é carregada
 document.addEventListener("DOMContentLoaded", () => {
