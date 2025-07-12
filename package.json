@@ -4,7 +4,7 @@
   "author": "Ralph Ramos",
   "scripts": {
     "server": "json-server --watch server.json --port 3333",
-    "dev": "webpack serve",
+    "dev": "webpack serve --host 0.0.0.0",
     "build": "webpack",
     "start": "concurrently \"npm run dev\" \"npm run server\""
   },

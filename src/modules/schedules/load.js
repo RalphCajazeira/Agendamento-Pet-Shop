@@ -1,3 +1,4 @@
+import { API_URL } from "../../config/api";
 import { createScheduleItem } from "../form/submit";
 
 export function schedulesDay() {
@@ -9,7 +10,7 @@ export function schedulesDay() {
 
     if (!currentDate) return; // evita erros se estiver vazio
 
-    fetch("http://localhost:3333/schedules")
+    fetch(`${API_URL}/schedules`)
       .then((response) => response.json())
       .then((schedules) => {
         const filtered = schedules.filter((schedule) => {
@@ -29,10 +30,14 @@ export function schedulesDay() {
 
         // agora sim pode iterar e preencher
         filtered.forEach((schedule) => {
-          const { namePet, nameTutor, descService, scheduleTime } = schedule;
+          const { id, namePet, nameTutor, descService, scheduleTime } =
+            schedule;
           const dayHours = Number(scheduleTime.split(":")[0]);
 
+          console.log("Agendamento carregado:", schedule);
+
           const item = createScheduleItem({
+            id, // <-- ESSENCIAL!
             namePet,
             nameTutor,
             descService,

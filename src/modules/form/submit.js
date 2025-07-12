@@ -1,3 +1,4 @@
+import { API_URL } from "../../config/api";
 import dayjs from "dayjs";
 import { openModal, closeModal } from "../../utils/modal-control";
 
@@ -12,12 +13,14 @@ newSchedule.addEventListener("click", () => {
 
 // Envia o formulário de novo agendamento
 formSchedule.onsubmit = (event) => {
-  event.preventDefault(); // previne recarregamento da página
+  event.preventDefault();
 
-  const formData = getFormData(); // coleta os dados do formulário
+  const formData = getFormData();
 
-  // Salva no banco de dados (JSON Server)
-  fetch("http://localhost:3333/schedules", {
+  // Garante que não exista id antes de enviar, senão pode sobrescrever!
+  delete formData.id;
+
+  fetch(`${API_URL}/schedules`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,25 +31,28 @@ formSchedule.onsubmit = (event) => {
     .then((result) => {
       console.log("Agendamento criado com sucesso!", result);
 
-      // Verifica se a data do agendamento é igual à data atualmente exibida
-      const scheduleDate = formData.scheduleDate;
-      const currentDate = document.getElementById("current-date").value;
+      // Confere se o id foi retornado corretamente
+      if (!result.id) {
+        console.warn(
+          "ID não retornado pelo servidor. Não será adicionado na DOM."
+        );
+        return;
+      }
 
-      if (scheduleDate === currentDate) {
-        // Cria o elemento visual do agendamento com o ID retornado do backend
+      // Exibe na tela apenas se a data for a mesma do calendário selecionado
+      const currentDate = document.getElementById("current-date").value;
+      if (formData.scheduleDate === currentDate) {
         const scheduleItem = createScheduleItem({
           ...formData,
-          id: result.id,
+          id: result.id, // ID gerado pelo backend
         });
 
-        const [dayHours] = formData.scheduleTime.split(":");
-        const hour = Number(dayHours);
+        const hour = Number(formData.scheduleTime.split(":")[0]);
 
         const periodMorning = document.getElementById("period-morning");
         const periodAfternoon = document.getElementById("period-afternoon");
         const periodNight = document.getElementById("period-night");
 
-        // Insere o agendamento no período correspondente (manhã, tarde ou noite)
         if (hour <= 12) {
           periodMorning.appendChild(scheduleItem);
         } else if (hour < 18) {
@@ -56,7 +62,9 @@ formSchedule.onsubmit = (event) => {
         }
       }
 
-      closeModal(modal); // fecha o modal após o envio
+      // Limpa formulário e fecha modal
+      formSchedule.reset();
+      closeModal(modal);
     })
     .catch((error) => {
       console.error("Erro ao criar agendamento:", error);
@@ -72,7 +80,7 @@ function getFormData() {
     descService: document.getElementById("desc-service").value,
     scheduleDate: document.getElementById("schedule-date").value,
     scheduleTime: document.getElementById("schedule-time").value,
-    creationDate: dayjs().toISOString(), // salva a data de criação
+    creationDate: dayjs().toISOString(),
   };
 }
 
@@ -85,7 +93,7 @@ export function createScheduleItem({
   id,
 }) {
   const li = document.createElement("li");
-  li.dataset.id = id; // armazena o ID no DOM para poder deletar depois
+  li.dataset.id = id; // ← ok com id string
 
   const strong = document.createElement("strong");
   strong.textContent = scheduleTime;
@@ -102,12 +110,12 @@ export function createScheduleItem({
   button.classList.add("remove-schedule");
   button.textContent = "Remover agendamento";
 
-  // Ao clicar no botão "Remover agendamento", faz DELETE no servidor e remove da tela
+  // Ao clicar no botão "Remover agendamento", faz DELETE no backend e remove da tela
   button.addEventListener("click", () => {
     const scheduleId = li.dataset.id;
 
     if (scheduleId) {
-      fetch(`http://localhost:3333/schedules/${scheduleId}`, {
+      fetch(`${API_URL}/schedules/${scheduleId}`, {
         method: "DELETE",
       })
         .then(() => {
@@ -118,7 +126,7 @@ export function createScheduleItem({
           console.error("Erro ao remover agendamento do servidor:", err);
         });
     } else {
-      li.remove(); // fallback caso não haja ID
+      li.remove(); // fallback
     }
   });
 
