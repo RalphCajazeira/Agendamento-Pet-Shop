@@ -1,5 +1,56 @@
 {
-  "schedules": [],
+  "schedules": [
+    {
+      "id": "80f2",
+      "nameTutor": "Ralph",
+      "namePet": "Rex",
+      "tutorNumber": "71 99177-1989",
+      "descService": "Banho",
+      "scheduleDate": "2025-07-12",
+      "scheduleTime": "20:00",
+      "creationDate": "2025-07-12T22:21:21.718Z"
+    },
+    {
+      "id": "4a4d",
+      "nameTutor": "Ralph",
+      "namePet": "Rex",
+      "tutorNumber": "71 99177-1989",
+      "descService": "Banho",
+      "scheduleDate": "2025-07-12",
+      "scheduleTime": "20:00",
+      "creationDate": "2025-07-12T22:21:23.373Z"
+    },
+    {
+      "id": "7202",
+      "nameTutor": "Ralph",
+      "namePet": "Rex",
+      "tutorNumber": "71 99177-1989",
+      "descService": "Banho",
+      "scheduleDate": "2025-07-13",
+      "scheduleTime": "9:00",
+      "creationDate": "2025-07-12T22:21:30.529Z"
+    },
+    {
+      "id": "1f46",
+      "nameTutor": "Ralph",
+      "namePet": "Rex",
+      "tutorNumber": "71 99177-1989",
+      "descService": "Banho",
+      "scheduleDate": "2025-07-13",
+      "scheduleTime": "13:00",
+      "creationDate": "2025-07-12T22:21:34.686Z"
+    },
+    {
+      "id": "d3a8",
+      "nameTutor": "Ralph",
+      "namePet": "Rex",
+      "tutorNumber": "71 99177-1989",
+      "descService": "Banho",
+      "scheduleDate": "2025-07-13",
+      "scheduleTime": "19:00",
+      "creationDate": "2025-07-12T22:21:38.179Z"
+    }
+  ],
   "openingHours": [
     [
       "9:00",

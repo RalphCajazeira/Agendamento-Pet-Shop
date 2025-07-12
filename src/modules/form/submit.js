@@ -1,40 +1,69 @@
+import dayjs from "dayjs";
 import { openModal, closeModal } from "../../utils/modal-control";
 
 const formSchedule = document.getElementById("form-schedule");
 const modal = document.getElementById("modal-schedule");
 const newSchedule = document.querySelector("#btn-new-schedule");
 
-// ✅ Abrir o modal
+// Abre o modal ao clicar no botão
 newSchedule.addEventListener("click", () => {
   openModal(modal);
 });
 
-// ✅ Enviar o formulário
+// Envia o formulário de novo agendamento
 formSchedule.onsubmit = (event) => {
-  event.preventDefault();
+  event.preventDefault(); // previne recarregamento da página
 
-  const data = getFormData();
-  const scheduleItem = createScheduleItem(data);
+  const formData = getFormData(); // coleta os dados do formulário
 
-  const [dayHours] = document.getElementById("schedule-time").value.split(":");
+  // Salva no banco de dados (JSON Server)
+  fetch("http://localhost:3333/schedules", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      console.log("Agendamento criado com sucesso!", result);
 
-  console.log(Number(dayHours));
+      // Verifica se a data do agendamento é igual à data atualmente exibida
+      const scheduleDate = formData.scheduleDate;
+      const currentDate = document.getElementById("current-date").value;
 
-  const periodMorning = document.getElementById("period-morning");
-  const periodAfternoon = document.getElementById("period-afternoon");
-  const periodNight = document.getElementById("period-night");
+      if (scheduleDate === currentDate) {
+        // Cria o elemento visual do agendamento com o ID retornado do backend
+        const scheduleItem = createScheduleItem({
+          ...formData,
+          id: result.id,
+        });
 
-  if (dayHours <= 12) {
-    periodMorning.appendChild(scheduleItem);
-  } else if (dayHours > 12 && dayHours < 18) {
-    periodAfternoon.appendChild(scheduleItem);
-  } else {
-    periodNight.appendChild(scheduleItem);
-  }
+        const [dayHours] = formData.scheduleTime.split(":");
+        const hour = Number(dayHours);
 
-  closeModal(modal);
+        const periodMorning = document.getElementById("period-morning");
+        const periodAfternoon = document.getElementById("period-afternoon");
+        const periodNight = document.getElementById("period-night");
+
+        // Insere o agendamento no período correspondente (manhã, tarde ou noite)
+        if (hour <= 12) {
+          periodMorning.appendChild(scheduleItem);
+        } else if (hour < 18) {
+          periodAfternoon.appendChild(scheduleItem);
+        } else {
+          periodNight.appendChild(scheduleItem);
+        }
+      }
+
+      closeModal(modal); // fecha o modal após o envio
+    })
+    .catch((error) => {
+      console.error("Erro ao criar agendamento:", error);
+    });
 };
 
+// Coleta os dados preenchidos no formulário
 function getFormData() {
   return {
     nameTutor: document.getElementById("name-tutor").value,
@@ -43,11 +72,20 @@ function getFormData() {
     descService: document.getElementById("desc-service").value,
     scheduleDate: document.getElementById("schedule-date").value,
     scheduleTime: document.getElementById("schedule-time").value,
+    creationDate: dayjs().toISOString(), // salva a data de criação
   };
 }
 
-function createScheduleItem({ namePet, nameTutor, descService, scheduleTime }) {
+// Cria visualmente o agendamento na tela
+export function createScheduleItem({
+  namePet,
+  nameTutor,
+  descService,
+  scheduleTime,
+  id,
+}) {
   const li = document.createElement("li");
+  li.dataset.id = id; // armazena o ID no DOM para poder deletar depois
 
   const strong = document.createElement("strong");
   strong.textContent = scheduleTime;
@@ -63,7 +101,26 @@ function createScheduleItem({ namePet, nameTutor, descService, scheduleTime }) {
   const button = document.createElement("button");
   button.classList.add("remove-schedule");
   button.textContent = "Remover agendamento";
-  button.addEventListener("click", () => li.remove());
+
+  // Ao clicar no botão "Remover agendamento", faz DELETE no servidor e remove da tela
+  button.addEventListener("click", () => {
+    const scheduleId = li.dataset.id;
+
+    if (scheduleId) {
+      fetch(`http://localhost:3333/schedules/${scheduleId}`, {
+        method: "DELETE",
+      })
+        .then(() => {
+          li.remove();
+          console.log(`Agendamento ${scheduleId} removido com sucesso.`);
+        })
+        .catch((err) => {
+          console.error("Erro ao remover agendamento do servidor:", err);
+        });
+    } else {
+      li.remove(); // fallback caso não haja ID
+    }
+  });
 
   li.appendChild(strong);
   li.appendChild(div);
@@ -73,24 +130,16 @@ function createScheduleItem({ namePet, nameTutor, descService, scheduleTime }) {
   return li;
 }
 
-// ✅ Fechar ao clicar fora do conteúdo
+// Fecha o modal ao clicar fora do conteúdo
 modal.addEventListener("click", (event) => {
   if (event.target === event.currentTarget) {
     closeModal(modal);
   }
 });
 
-// ✅ Botão voltar do celular fecha modal
+// Botão voltar do celular fecha modal
 window.addEventListener("popstate", () => {
   if (modal.classList.contains("active")) {
     closeModal(modal);
-  }
-});
-
-// ✅ Remover agendamento
-document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("remove-schedule")) {
-    const li = event.target.closest("li");
-    if (li) li.remove();
   }
 });

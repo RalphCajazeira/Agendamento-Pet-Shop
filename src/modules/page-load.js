@@ -4,7 +4,6 @@ import { hoursLoad } from "./form/hours-load";
 const selectedDate = document.getElementById("current-date");
 const scheduleDate = document.getElementById("schedule-date");
 
-
 const currentDate = dayjs(new Date());
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -34,6 +34,7 @@ export function hoursLoad({ date }) {
       schedulesTime.appendChild(option);
     } else {
       schedulesTime.appendChild(option);
+
       option.disabled = true;
     }
   });
