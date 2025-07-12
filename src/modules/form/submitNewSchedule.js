@@ -3,9 +3,6 @@ import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 dayjs.extend(isSameOrAfter);
 
-// Importa a função que carrega os horários da empresa
-import { carregarHorariosDisponiveis } from "../config/opening-hours.js";
-
 // Pegar elementos
 const currentDate = document.getElementById("current-date");
 const form = document.querySelector(".modal-form");
@@ -19,7 +16,9 @@ const currentDateDay = dayjs();
 
 // ✅ Verifica se o usuário está em um dispositivo móvel
 function isMobile() {
-  return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+  return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(
+    navigator.userAgent
+  );
 }
 
 // ✅ Abre o modal e define os valores iniciais
@@ -40,18 +39,10 @@ newSchedule.addEventListener("click", () => {
   // Bloquear datas passadas
   scheduleDate.min = currentDateDay.format("YYYY-MM-DD");
 
-  // Carregar horários disponíveis da empresa
-  carregarHorariosDisponiveis(scheduleDate.value);
-
   // Histórico no mobile
   if (isMobile()) {
     history.pushState({ modalOpen: true }, "");
   }
-});
-
-// Atualiza horários ao mudar a data manualmente
-scheduleDate.addEventListener("change", () => {
-  carregarHorariosDisponiveis(scheduleDate.value);
 });
 
 // ✅ Fecha modal
@@ -99,4 +90,10 @@ window.addEventListener("popstate", () => {
   if (modal.classList.contains("active")) {
     fecharModal();
   }
+});
+
+//  Acontece quando a página é carregada
+document.addEventListener("DOMContentLoaded", () => {
+  // Atualiza a data atual
+  currentDate.value = currentDateDay.format("YYYY-MM-DD");
 });
