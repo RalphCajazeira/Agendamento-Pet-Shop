@@ -3,9 +3,11 @@ import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 dayjs.extend(isSameOrAfter);
 
-// Pegar input data
-const currentDate = document.getElementById("current-date");
+// Importa a função que carrega os horários da empresa
+import { carregarHorariosDisponiveis } from "../config/opening-hours.js";
 
+// Pegar elementos
+const currentDate = document.getElementById("current-date");
 const form = document.querySelector(".modal-form");
 const modal = document.getElementById("modal");
 const newSchedule = document.querySelector("#btn-new-schedule");
@@ -13,65 +15,63 @@ const scheduleDate = document.getElementById("schedule-date");
 const scheduleTime = document.getElementById("schedule-time");
 
 // Define a data atual
-const currentDateDay = dayjs(new Date());
+const currentDateDay = dayjs();
 
-document.addEventListener("DOMContentLoaded", function () {
-  const dataAtual = currentDateDay.format("YYYY-MM-DD");
-  currentDate.value = dataAtual;
-});
-
-// ✅ [ALTERADO] — Verifica se o usuário está em um dispositivo móvel
+// ✅ Verifica se o usuário está em um dispositivo móvel
 function isMobile() {
-  return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(
-    navigator.userAgent
-  );
+  return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
 }
 
-// ✅ [ALTERADO] — Adiciona estado ao histórico ao abrir o modal
-newSchedule.addEventListener("click", (event) => {
+// ✅ Abre o modal e define os valores iniciais
+newSchedule.addEventListener("click", () => {
   modal.classList.add("active");
   document.body.classList.add("no-scroll");
-  scheduleTime.value = currentDateDay.format("HH:mm");
 
-  // converte os dois em dayjs e zera a hora para garantir consistência
+  // Definir a data do agendamento
   const dataInput = dayjs(currentDate.value, "YYYY-MM-DD").startOf("day");
   const dataAtual = dayjs().startOf("day");
 
-  // comparação segura
   if (dataInput.isSameOrAfter(dataAtual)) {
     scheduleDate.value = currentDate.value;
   } else {
     scheduleDate.value = currentDateDay.format("YYYY-MM-DD");
   }
 
-  // Bloquear data anterior
+  // Bloquear datas passadas
   scheduleDate.min = currentDateDay.format("YYYY-MM-DD");
 
-  // ✅ [ADICIONADO] — Adiciona um novo estado ao histórico do navegador
+  // Carregar horários disponíveis da empresa
+  carregarHorariosDisponiveis(scheduleDate.value);
+
+  // Histórico no mobile
   if (isMobile()) {
     history.pushState({ modalOpen: true }, "");
   }
 });
 
-// ✅ [ADICIONADO] — Função para fechar o modal e voltar no histórico se necessário
+// Atualiza horários ao mudar a data manualmente
+scheduleDate.addEventListener("change", () => {
+  carregarHorariosDisponiveis(scheduleDate.value);
+});
+
+// ✅ Fecha modal
 function fecharModal() {
   modal.classList.remove("active");
   document.body.classList.remove("no-scroll");
 
-  // ✅ [ADICIONADO] — Volta no histórico se o modal estiver ativo
   if (history.state && history.state.modalOpen) {
     history.back();
   }
 }
 
-// ✅ [ALTERADO] — Usa a função fecharModal ao clicar fora do conteúdo do modal
+// ✅ Fechar ao clicar fora do conteúdo
 modal.addEventListener("click", (event) => {
   if (event.target === event.currentTarget) {
     fecharModal();
   }
 });
 
-// ✅ [ALTERADO] — Usa a função fecharModal ao enviar o formulário
+// ✅ Submissão do formulário
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -79,22 +79,22 @@ form.addEventListener("submit", (event) => {
   const namePet = document.getElementById("name-pet").value;
   const tutorNumber = document.getElementById("tutor-number").value;
   const descService = document.getElementById("desc-service").value;
-  const scheduleDate = document.getElementById("schedule-date").value;
-  const scheduleTime = document.getElementById("schedule-time").value;
+  const dataAgendamento = scheduleDate.value;
+  const horaAgendamento = scheduleTime.value;
 
   const data = {
     nameTutor,
     namePet,
     tutorNumber,
     descService,
-    scheduleDate,
-    scheduleTime,
+    scheduleDate: dataAgendamento,
+    scheduleTime: horaAgendamento,
   };
 
-  fecharModal(); // ✅ fecha modal corretamente e limpa o histórico
+  fecharModal(); // Fecha o modal ao finalizar
 });
 
-// ✅ [ADICIONADO] — Ouvinte para fechar o modal se o botão "voltar" for pressionado
+// ✅ Botão voltar do celular fecha modal
 window.addEventListener("popstate", () => {
   if (modal.classList.contains("active")) {
     fecharModal();

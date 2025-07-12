@@ -4,13 +4,15 @@
   "author": "Ralph Ramos",
   "scripts": {
     "server": "json-server --watch server.json --port 3333",
-    "dev": "webpack server",
-    "build": "webpack"
+    "dev": "webpack serve",
+    "build": "webpack",
+    "start": "concurrently \"npm run dev\" \"npm run server\""
   },
   "devDependencies": {
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
     "babel-loader": "^10.0.0",
+    "concurrently": "^9.2.0",
     "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
