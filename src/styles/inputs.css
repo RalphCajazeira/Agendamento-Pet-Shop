@@ -102,12 +102,29 @@
 
 @media (max-width: 53rem) {
   .input-date-wrapper {
-    width: fit-content; /* ou defina o tamanho desejado */
-    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .input-date {
-    flex: none;
-    width: auto;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .custom-arrow {
+    right: 0.75rem;
+    position: absolute;
+  }
+
+  .input-wrapper.box-duo {
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    & div {
+      width: 100%;
+    }
   }
 }

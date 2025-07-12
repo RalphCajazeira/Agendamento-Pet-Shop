@@ -13,4 +13,5 @@ import "./styles/buttons.css";
 import "./styles/modal.css";
 
 // JS
-import "./modules/form/newSchedule.js";
+import "./modules/form/submitNewSchedule.js";
+// import "./modules/form/submit.js";
