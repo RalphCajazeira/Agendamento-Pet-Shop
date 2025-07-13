@@ -29,8 +29,6 @@ formSchedule.onsubmit = (event) => {
   })
     .then((response) => response.json())
     .then((result) => {
-      console.log("Agendamento criado com sucesso!", result);
-
       // Confere se o id foi retornado corretamente
       if (!result.id) {
         console.warn(
@@ -120,7 +118,6 @@ export function createScheduleItem({
       })
         .then(() => {
           li.remove();
-          console.log(`Agendamento ${scheduleId} removido com sucesso.`);
         })
         .catch((err) => {
           console.error("Erro ao remover agendamento do servidor:", err);

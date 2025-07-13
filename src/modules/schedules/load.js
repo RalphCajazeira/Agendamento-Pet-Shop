@@ -17,8 +17,6 @@ export function schedulesDay() {
           return schedule.scheduleDate === currentDate;
         });
 
-        // console.log("Filtrados:", filtered);
-
         // limpa todos os itens anteriores antes de renderizar os novos
         const periodMorning = document.getElementById("period-morning");
         const periodAfternoon = document.getElementById("period-afternoon");
@@ -33,8 +31,6 @@ export function schedulesDay() {
           const { id, namePet, nameTutor, descService, scheduleTime } =
             schedule;
           const dayHours = Number(scheduleTime.split(":")[0]);
-
-          console.log("Agendamento carregado:", schedule);
 
           const item = createScheduleItem({
             id, // <-- ESSENCIAL!

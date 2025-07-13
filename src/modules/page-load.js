@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   schedulesDay();
 
   const date = selectedDate.value;
+  const scheduleDaily = schedulesDay();
 
-  hoursLoad({ date });
+  hoursLoad({ date, scheduleDaily });
 });
